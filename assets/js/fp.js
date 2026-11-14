@@ -93,8 +93,8 @@
   /* ---- carousel (scroll-snap; buttons are RTL-aware) ---- */
   $$('[data-carousel]').forEach((c) => {
     const track = $('[data-track]', c), prev = $('[data-prev]', c), next = $('[data-next]', c);
-    const rtl = getComputedStyle(track).direction === 'rtl';
-    const stepBy = (dir) => { const card = track.firstElementChild; const w = card.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0); track.scrollBy({ left: dir * w * (rtl ? -1 : 1), behavior: reduced ? 'auto' : 'smooth' }); };
+    // the direction is read at each step: the language script flips it after this code has run
+    const stepBy = (dir) => { const rtl = getComputedStyle(track).direction === 'rtl'; const card = track.firstElementChild; const w = card.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 0); track.scrollBy({ left: dir * w * (rtl ? -1 : 1), behavior: reduced ? 'auto' : 'smooth' }); };
     const sync = () => { const max = track.scrollWidth - track.clientWidth - 2, x = Math.abs(track.scrollLeft); prev.disabled = x <= 2; next.disabled = x >= max; };
     prev.addEventListener('click', () => stepBy(-1)); next.addEventListener('click', () => stepBy(1));
     track.addEventListener('scroll', sync, { passive: true }); addEventListener('resize', sync); sync();

@@ -48,7 +48,7 @@
         a.addEventListener('click', (e) => {
           e.preventDefault(); if (a.dataset.lang === lang) return;
           store.set(a.dataset.lang);
-          const url = location.pathname + location.hash;
+          const url = location.pathname + location.search + location.hash; // the query names the item or the demo being shown
           if (window.FP?.leave) window.FP.leave(url); else location.reload();
           if (window.FP?.leave && location.hash) setTimeout(() => location.reload(), 520); // a hash-only change does not reload on its own
         });
