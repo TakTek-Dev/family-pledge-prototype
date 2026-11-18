@@ -48,7 +48,9 @@
     flow.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target.matches('input[type=text]')) { e.preventDefault(); $('[data-step="next"]', panes[at])?.click(); } });
     $$('.vowcheck input', flow).forEach((c) => c.addEventListener('change', () => ($('#m-vows').textContent = '')));
 
-    /* what each kind of signature includes */
+    /* what each kind of signature includes; the home page hands over the kind already chosen there */
+    const chosen = new URLSearchParams(location.search).get('plan');
+    const preset = $$('input[name="plan"]', flow).find((r) => r.value === chosen); if (preset) preset.checked = true;
     const sync = () => { const free = $('input[name="plan"]:checked', flow).value === 'free'; $$('[data-paid]', flow).forEach((li) => (li.hidden = free)); };
     $$('input[name="plan"]', flow).forEach((r) => r.addEventListener('change', sync)); sync();
 
@@ -317,7 +319,8 @@ window.FPHome = (() => {
 
 /* sharing a page: the link is copied, or handed to WhatsApp; nothing else is sent */
 (() => {
-  const url = () => location.origin + location.pathname;
+  // an item page is nothing without its id; other query flags (demo, noloader) stay out of a shared link
+  const url = () => { const id = new URLSearchParams(location.search).get('id'); return location.origin + location.pathname + (id ? '?id=' + encodeURIComponent(id) : ''); };
   document.querySelectorAll('[data-copy-link]').forEach((b) => b.addEventListener('click', async () => {
     try { await navigator.clipboard.writeText(url()); window.FP?.toast?.('تم نسخ الرابط'); } catch { window.FP?.toast?.(url()); }
   }));
@@ -448,7 +451,9 @@ window.FPHome = (() => {
   const show = (place) => {
     chips.forEach((c) => c.setAttribute('aria-pressed', c.dataset.placeF === place));
     let n = 0; items.forEach((li) => { const on = !place || li.dataset.place === place; li.hidden = !on; if (on) n++; });
-    count.textContent = place ? `${n} من ${place}` : `${n} أخبار`;
+    // Arabic counts: one and two have their own words, three to ten take the plural, eleven up the singular
+    const word = n === 1 ? 'خبر واحد' : n === 2 ? 'خبران' : n <= 10 ? `${n} أخبار` : `${n} خبرا`;
+    count.textContent = place ? `${word} من ${place}` : word;
   };
   chips.forEach((c) => c.addEventListener('click', () => show(c.dataset.placeF)));
   show('');

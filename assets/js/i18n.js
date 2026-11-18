@@ -16,6 +16,7 @@
   // pages without the loader (the games) stay hidden for the moment the dictionary takes to arrive
   if (lang !== 'ar' && !document.querySelector('.loader')) { root.style.visibility = 'hidden'; setTimeout(() => (root.style.visibility = ''), 1500); }
   const base = (document.currentScript?.src || '').replace(/js\/i18n\.js.*$/, '');
+  const ver = ((document.currentScript?.src || '').match(/[?&]v=(\d+)/) || [])[1]; // the dictionaries change with every build, so they carry its version
   let dict = null, patterns = [];
   const norm = (s) => s.replace(/\s+/g, ' ').trim();
 
@@ -48,7 +49,7 @@
         a.addEventListener('click', (e) => {
           e.preventDefault(); if (a.dataset.lang === lang) return;
           store.set(a.dataset.lang);
-          const url = location.pathname + location.hash;
+          const url = location.pathname + location.search + location.hash; // the query names the item or the demo being shown
           if (window.FP?.leave) window.FP.leave(url); else location.reload();
           if (window.FP?.leave && location.hash) setTimeout(() => location.reload(), 520); // a hash-only change does not reload on its own
         });
@@ -72,7 +73,7 @@
   };
 
   const whenDom = new Promise((ok) => (document.readyState === 'loading' ? addEventListener('DOMContentLoaded', ok, { once: true }) : ok()));
-  const load = lang === 'ar' ? Promise.resolve() : fetch(`${base}i18n/${lang}.json`).then((r) => (r.ok ? r.json() : null)).then((j) => {
+  const load = lang === 'ar' ? Promise.resolve() : fetch(`${base}i18n/${lang}.json${ver ? `?v=${ver}` : ''}`).then((r) => (r.ok ? r.json() : null)).then((j) => {
     if (!j) { lang = 'ar'; return; }
     dict = j;
     // the most specific template first: «قطعة «{0}» مستقيمة الآن…» must win over the looser «قطعة {0}. …»

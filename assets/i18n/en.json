@@ -1235,5 +1235,17 @@
 "استخدموا البريد الإلكتروني": "Use email",
 "شاهدوا بيتا مثالا": "See an example home",
 "تكبير": "Enlarge",
-"تصغير": "Fit to screen"
+"تصغير": "Fit to screen",
+"{0} أخبار": "{0} news stories",
+"{0} أخبار من {0}": "{0} news stories from {0}",
+"محتوى مجاني لكل من يشارك في الميثاق.": "Free content for everyone who takes part in the Pledge.",
+"محتوى خاص بالمشتركين. يفتح بعد الاشتراك في الميثاق.": "Content for subscribers. It opens after you subscribe to the Pledge.",
+"الحلقة السابقة": "Previous episode",
+"الحلقة التالية": "Next episode",
+"خبر واحد": "1 news story",
+"خبران": "2 news stories",
+"{0} خبرا": "{0} news stories",
+"خبر واحد من {0}": "1 news story from {0}",
+"خبران من {0}": "2 news stories from {0}",
+"{0} خبرا من {0}": "{0} news stories from {0}"
 }
