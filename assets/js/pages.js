@@ -451,7 +451,9 @@ window.FPHome = (() => {
   const show = (place) => {
     chips.forEach((c) => c.setAttribute('aria-pressed', c.dataset.placeF === place));
     let n = 0; items.forEach((li) => { const on = !place || li.dataset.place === place; li.hidden = !on; if (on) n++; });
-    count.textContent = place ? `${n} أخبار من ${place}` : `${n} أخبار`;
+    // Arabic counts: one and two have their own words, three to ten take the plural, eleven up the singular
+    const word = n === 1 ? 'خبر واحد' : n === 2 ? 'خبران' : n <= 10 ? `${n} أخبار` : `${n} خبرا`;
+    count.textContent = place ? `${word} من ${place}` : word;
   };
   chips.forEach((c) => c.addEventListener('click', () => show(c.dataset.placeF)));
   show('');

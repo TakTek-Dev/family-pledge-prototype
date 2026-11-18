@@ -1241,5 +1241,11 @@
 "محتوى مجاني لكل من يشارك في الميثاق.": "Misak'a katılan herkes için ücretsiz içerik.",
 "محتوى خاص بالمشتركين. يفتح بعد الاشتراك في الميثاق.": "Abonelere özel içerik. Misak'a abone olduktan sonra açılır.",
 "الحلقة السابقة": "Önceki bölüm",
-"الحلقة التالية": "Sonraki bölüm"
+"الحلقة التالية": "Sonraki bölüm",
+"خبر واحد": "1 haber",
+"خبران": "2 haber",
+"{0} خبرا": "{0} haber",
+"خبر واحد من {0}": "1 haber · {0}",
+"خبران من {0}": "2 haber · {0}",
+"{0} خبرا من {0}": "{0} haber · {0}"
 }

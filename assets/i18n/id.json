@@ -1241,5 +1241,11 @@
 "محتوى مجاني لكل من يشارك في الميثاق.": "Konten gratis bagi semua yang ikut serta dalam Piagam.",
 "محتوى خاص بالمشتركين. يفتح بعد الاشتراك في الميثاق.": "Konten khusus pelanggan. Terbuka setelah berlangganan Piagam.",
 "الحلقة السابقة": "Episode sebelumnya",
-"الحلقة التالية": "Episode berikutnya"
+"الحلقة التالية": "Episode berikutnya",
+"خبر واحد": "1 berita",
+"خبران": "2 berita",
+"{0} خبرا": "{0} berita",
+"خبر واحد من {0}": "1 berita dari {0}",
+"خبران من {0}": "2 berita dari {0}",
+"{0} خبرا من {0}": "{0} berita dari {0}"
 }
